@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', function () {
     const loader = document.getElementById('loader');
     const userProfile = document.getElementById('userProfile');
@@ -7,17 +5,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const paginationContainer = document.getElementById('pagination');
     const usernameInput = document.getElementById('usernameInput');
 
-    // Replace 'YOUR_USERNAME' with the GitHub username you want to fetch data for
     let username = 'johnpapa';
     const perPage = 10;
     let currentPage = 1;
 
-    // Fetch user data from GitHub API
     function fetchUserData() {
         fetch(`https://api.github.com/users/${username}`)
             .then(response => response.json())
             .then(user => {
-                loader.style.display = 'none'; // Hide loader
+                loader.style.display = 'none'; 
 
                 userProfile.innerHTML = `
                     <img src="${user.avatar_url}" alt="${user.login} profile picture">
@@ -33,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    // Fetch repositories data from GitHub API
     function fetchRepositories(page) {
         fetch(`https://api.github.com/users/${username}/repos?per_page=${perPage}&page=${page}`)
             .then(response => response.json())
@@ -75,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             paginationContainer.appendChild(button);
         }
     }
-    // Search repositories based on the entered username
+
     window.searchRepositories = function () {
         const inputUsername = usernameInput.value.trim();
         if (inputUsername) {
@@ -88,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    // Initial fetch
     fetchUserData();
     fetchRepositories(currentPage);
     updatePagination(true);
